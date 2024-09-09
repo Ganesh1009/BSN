@@ -1,0 +1,9 @@
+*.o
+/build/
+.project
+.cproject
+.vscode*
+*vscode
+*.eww 
+*kdev4/
+*.kdev4 

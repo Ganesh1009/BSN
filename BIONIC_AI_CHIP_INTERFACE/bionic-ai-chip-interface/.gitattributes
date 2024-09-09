@@ -1,0 +1,7 @@
+src/sessions/datasets/fullbsn.json filter=lfs diff=lfs merge=lfs -text
+src/sessions/datasets/maria-dataset.json filter=lfs diff=lfs merge=lfs -text
+src/assets/*.json filter=lfs diff=lfs merge=lfs -text
+src/assets/datasets/mathias-02.json filter=lfs diff=lfs merge=lfs -text
+src/assets/datasets/fullbsn.json filter=lfs diff=lfs merge=lfs -text
+src/assets/datasets/maria-dataset.json filter=lfs diff=lfs merge=lfs -text
+src/assets/datasets/mathias-iso.json filter=lfs diff=lfs merge=lfs -text

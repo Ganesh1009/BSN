@@ -1,0 +1,6 @@
+[submodule "extern/shared-library"]
+	path = extern/shared-library
+	url = ../shared-library.git
+[submodule "extern/huntergate"]
+	path = extern/huntergate
+	url = https://github.com/hunter-packages/gate.git

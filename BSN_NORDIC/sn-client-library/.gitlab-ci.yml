@@ -1,0 +1,14 @@
+image: registry.opendfki.de/bionic/h2020/zephyr/sn-client-library 
+ 
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+before_script:
+  - git submodule sync --recursive
+  - git submodule update --init --recursive
+
+build_image:
+  tags:
+    - docker
+  script:
+    - ./build_package.sh

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>wearHEALTH License System</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+</head>
+<title>License View</title>
+<style>
+    input[type=text] {
+        border-radius: 5px;
+    }
+
+    input[type=number] {
+        border-radius: 5px;
+    }
+
+    input[type=date] {
+        border-radius: 5px;
+    }
+
+    select {
+        border-radius: 5px;
+    }
+
+    textarea {
+        border-radius: 5px;
+    }
+
+    input[type=submit] {
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 25px;
+        background-color: cadetblue;
+
+    }
+
+    td {
+        padding: 8px;
+    }
+</style>
+
+<body>
+    <form action="/logout" method="GET">
+        <input id="logoutBtn" type="submit" value="Logout" style="background-color: #4CAF50;
+            color: rgb(160, 104, 0);
+            float: right;width: fit-content;  height: fit-content;
+            cursor: pointer;">
+    </form>
+
+    <table id="example" class="table table-striped table-bordered" style="width:100%"></table>
+
+    <div class="create_new_license">
+
+        <form id="create_form" action="/modify" method="POST">
+            <input type="hidden" id="modification_type" name="modification_type" value="Register">
+            <table id="form_table" align="center" style="border-radius: 10px; background-color: rgb(185, 231, 233);">
+                <tr>
+                    <td align="center" colspan="2">
+                        <h1 style="font-family: 'Franklin Gothic Medium';">License Registration</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="license_id">License ID</label>
+                    </td>
+                    <td>
+                        <input type="text" name="license_id" id="license_id" placeholder="ABC10010" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="license_type">License Type</label>
+                    </td>
+                    <td>
+                        <select name="license_type" id="license_type">
+                            <option value="commercial">Commercial</option>
+                            <option value="rental">Rental</option>
+                            <option value="internal">Internal</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="mode">Tracking Mode</label>
+                    </td>
+                    <td>
+                        <select name="mode" id="mode">
+                            <option value="full_body">Full body</option>
+                            <option value="lower_body">Lower body</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="former_license_id">Former License ID</label>
+                    </td>
+                    <td>
+                        <input type="text" name="former_license_id" id="former_license_id" placeholder="XYZ812B">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="invoice_id">Invoice ID</label>
+                    </td>
+                    <td>
+                        <input type="number" step="any" name="invoice_id" id="invoice_id" placeholder="2021.2" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Is License Upgraded</label>
+                    </td>
+                    <td>
+                        <input type="radio" id="license_upgraded" name="upgraded">
+                        <label for="license_upgraded">True</label>
+                        <input type="radio" id="license_not_upgraded" name="upgraded">
+                        <label for="license_not_upgraded">False</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="base_price">Base Price</label>
+                    </td>
+                    <td>
+                        <input type="number" name="base_price" step="any" id="base_price" placeholder="0.00" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="upgrade_price">Upgrade Price</label>
+                    </td>
+                    <td>
+                        <input type="number" name="upgrade_price" step="any" id="upgrade_price" placeholder="0.00">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="initial_release_date">Inital Release Date</label>
+                    </td>
+                    <td>
+                        <input type="date" name="initial_release_date" id="initial_release_date" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="upgrade_date">Upgrade Date</label>
+                    </td>
+                    <td>
+                        <input type="date" name="upgrade_date" id="upgrade_date">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="payment_type">Payment Type</label>
+                    </td>
+                    <td>
+                        <select name="payment_type" id="payment_type">
+                            <option value="contractual">Contractual<login /option>
+                            <option value="individual">Individual</option>
+                            <option value="individual_updated">Individual updated</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="status">Payment Status</label>
+                    </td>
+                    <td>
+                        <select name="status" id="status">
+                            <option value="pending">Pending</option>
+                            <option value="paid">Paid</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="deployment_comment">Deployment Comments</label>
+                    </td>
+                    <td>
+                        <textarea id="deployment_comment" name="deployment_comment"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="pc_specs">PC Specs</label>
+                    </td>
+                    <td>
+                        <textarea id="pc_specs" name="pc_specs"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" colspan="2">
+                        <input id='register_button' type="submit" value="Register">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        var json_array = JSON.parse('<%- JSON.stringify(data) %>');
+        var config = JSON.parse('<%- JSON.stringify(config) %>');
+        var data_list = [];
+
+        Object.keys(json_array).forEach(function (index) {
+            json_document = json_array[index].content;
+            var row_list = [];
+            Object.keys(json_document).forEach(function (key) {
+
+                if (key == 'payment_info') {
+                    row_list.push(json_document[key]['base_price']);
+                    row_list.push(json_document[key]['upgrade_price']);
+                    return;
+                }
+                else if (key == 'date_info') {
+                    row_list.push(json_document[key]['initial_release_date']);
+                    row_list.push(json_document[key]['upgrade_date']);
+                    return;
+                }
+                else if (key == 'payment_status_info') {
+                    row_list.push(json_document[key]['payment_type']);
+                    row_list.push(json_document[key]['status']);
+                    return;
+                }
+                else if (key == 'doc_version') {
+                    return;
+                }
+                else {
+                    row_list.push(json_document[key]);
+                    return;
+                }
+            });
+            data_list.push(row_list);
+        });
+
+
+        var data_table = $('#example').DataTable({
+            data: data_list,
+            columns: [
+                { title: "LICENSE ID" },
+                { title: "LICENSE TYPE" },
+                { title: "MODE" },
+                { title: "FORMER LICENSE ID" },
+                { title: "INVOICE ID" },
+                { title: "UPGRADED" },
+                { title: "BASE PRICE" },
+                { title: "UPGRADE PRICE" },
+                { title: "INITIAL RELEASE DATE" },
+                { title: "UPGRADE DATE" },
+                { title: "PAYMENT TYPE" },
+                { title: "PAYMENT STATUS" },
+                { title: "DEPLOYMENT COMMENT" },
+                { title: "PC SPECS" },
+                {
+                    //edit button creation    
+                    render: function (data, type, row) {
+                        return createButton('edit', row.id);
+                    }
+                },
+                {
+                    //delete button creation    
+                    render: function (data, type, row) {
+                        return createButton('delete', row.id);
+                    }
+                }
+            ]
+        });
+
+        $('#example').on('click', 'tr .edit', function (e) {
+            var clicked_row_data = data_table.row($(this).parents('tr')).data();
+            document.getElementById('license_id').value = clicked_row_data[0];
+            document.getElementById('license_type').value = clicked_row_data[1];
+            document.getElementById('mode').value = clicked_row_data[2];
+            document.getElementById('former_license_id').value = clicked_row_data[3];
+            document.getElementById('invoice_id').value = clicked_row_data[4];
+
+            if (clicked_row_data[5] == 'true')
+                document.getElementById('license_upgraded').checked = clicked_row_data[5];
+            else
+                document.getElementById('license_not_upgraded').checked = clicked_row_data[5];
+
+            document.getElementById('base_price').value = clicked_row_data[6];
+            document.getElementById('upgrade_price').value = clicked_row_data[7];
+            document.getElementById('initial_release_date').value = clicked_row_data[8];
+            document.getElementById('upgrade_date').value = clicked_row_data[9];
+            document.getElementById('payment_type').value = clicked_row_data[10];
+            document.getElementById('status').value = clicked_row_data[11];
+            document.getElementById('deployment_comment').value = clicked_row_data[12];
+            document.getElementById('pc_specs').value = clicked_row_data[13];
+
+            document.getElementById('register_button').value = 'Update'
+            document.getElementById('modification_type').value = 'Update'
+
+        });
+
+        function createButton(buttonType, rowID) {
+
+            var buttonText = buttonType == "edit" ? "Edit" : "Delete";
+            return '<button class="' + buttonType + '" type="button" id="' + rowID + '">' + buttonText + '</button>';
+
+        }
+    </script>
+</body>
+
+</html>

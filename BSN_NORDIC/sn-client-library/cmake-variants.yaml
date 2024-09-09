@@ -1,0 +1,25 @@
+buildType:
+  default: debug
+  choices:
+    debug:
+      short: Debug
+      long: Emit debug information
+      buildType: Debug
+    release:
+      short: Release
+      long: Optimize generated code
+      buildType: Release
+
+ENABLE_TESTING:
+  default: 'ON'
+  choices:
+    'ON':
+      short: Tests
+      long: Enabling testing
+      settings:
+        ENABLE_TESTING: "ON"
+    'OFF': 
+      short: No Tests
+      long: Disable testing
+      settings:
+        ENABLE_TESTING: "OFF"

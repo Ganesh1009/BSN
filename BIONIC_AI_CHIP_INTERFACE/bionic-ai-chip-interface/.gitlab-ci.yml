@@ -1,0 +1,48 @@
+image: node:14
+
+stages:
+  - build
+  - test
+
+cache:
+  paths:
+  - node_modules/
+
+install_dependencies:
+  stage: build
+  tags: 
+    - docker
+  script:
+    - npm ci
+  artifacts:
+    paths:
+      - node_modules/
+
+build_application:
+  stage: build
+  tags:
+    - docker
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - node_modules/
+
+testing_test:
+  stage: test
+  tags: 
+    - docker
+  script: 
+    - npm run test:cov
+  coverage: /All\sfiles.*?\s+(\d+.\d+)/
+  artifacts:
+    reports:
+      junit: junit.xml
+
+testing_test:e2e:
+  stage: test
+  tags: 
+    - docker
+  script:  
+    - npm run test:e2e  
+ 
